@@ -1,0 +1,93 @@
+Requirements :
+
+The requirements for Moodle are as follows: 
+
+Hardware :
+Disk space: 160MB free (min). You will require more free space to store your teaching materials. 
+Memory: 256MB (min), 1GB (recommended).
+This includes hosting limits of PHP or MySQL on a hosting service. 
+The capacity can limit the number of users your Moodle site can handle. 
+
+Software :
+Web server software. Most sites use Apache as the web server software. Moodle should work fine under any web server that supports PHP, such as IIS on Windows platforms. 
+PHP scripting language. (Please note that there have been issues installing Moodle with PHP-Accelerator). There are currently two versions (or branches) of PHP available: PHP4 and PHP5. 
+
+
+Download and copy files into place :
+There are two ways to get Moodle, either as a compressed package from http://download.moodle.org/ or via CVS. 
+
+After downloading and unpacking the archive, or checking out the files via CVS, you will be left with a directory called "moodle", containing a number of files and folders. 
+
+For the standard package, you can either place the whole folder in your web server documents directory, in which case the site will be located at http://yourwebserver.com/moodle, or you can copy all the contents straight into the main web server documents directory, in which case the site will be simply http://yourwebserver.com. 
+
+Tip: If you are downloading Moodle to your local computer and then uploading it to your web site, it is usually better to upload the whole archive as one file, and then do the unpacking on the server. Even web hosting interfaces like cPanel allow you to uncompress archives in the "File Manager". 
+
+
+Install a theme 
+To install a theme: 
+Unzip the .zip file to an empty local directory. 
+Upload folder to your web server to the /moodle/theme/[Theme Name]. (Replace [Theme Name] with the name of the theme you have downloaded.) Ensure the new theme folder and its contents are readable by the webserver. Change Read and Write permissions (CHMOD) for the files and folder to 755 - Owner read/write/execute, Group read/execute, Everyone read/execute. Incorrect permissions may prevent display of the newly installed theme. 
+Choose your new theme from within Moodle via Administration > Appearance > Themes > Theme selector (version 1.7+) or Administration > Configuration > Themes (older versions). 
+
+
+
+Setting-up your web server 
+You need to create a blank database for Moodle to use and finally create a directory on your hard disk for Moodle to save your materials and other files you upload into your courses before you can start the installation process. 
+
+Create an empty database 
+You need to create an empty database (eg "moodle") in your database system along with a special user (for example "moodleuser") that has access to that database (and that database only). You could use the "root" user if you wanted to for a test server, but this is not recommended for a production system: if hackers manage to discover the password then your whole database system would be at risk, rather than just one database. 
+
+If you are using a webhost, they will probably have a control panel web interface for you to create your database. 
+
+The cPanel system is one of the most popular of these. To create a database using cPanel: 
+
+Click on the MySQL Databases icon. 
+Type moodle in the New Database field and click Create Database. 
+Type a username and password (not one you use elsewhere) in the respective fields and click Create User.
+Note that the username and database names may be prefixed by your cPanel account name and an underscore, and truncated to 16 characters. When entering this information into the Moodle installer - use the full names. 
+Now use the Add Users to Databases button and give this new user account ALL rights to the new database. 
+Create the data directory 
+Moodle will also need some space on your server's hard disk to store uploaded files, such as course documents and user pictures. The Moodle installer tries hard to create the moodledata directory for you but if it fails then you will have to create a directory for this purpose manually. 
+
+
+If you don't protect the data directory from direct web access, anybody will be able to impersonate any user of your Moodle site (including the admin user!!!), and all of your course materials will be available to the web at large. 
+ 
+
+Start Moodle install 
+There are two basic ways to install Moodle: Most Moodlers are used to the installer script but with Moodle 2.0 you may install it from the command line. 
+
+Install with installer script 
+To run the installer script (install.php), just try to access your Moodle main URL using a web browser, or access http://yourserver/install.php directly. 
+
+(The Installer will try to set a session cookie. If you get a popup warning in your browser make sure you accept that cookie!) 
+
+Moodle will detect that configuration is necessary and will lead you through some screens to help you create a new configuration file called config.php. At the end of the process Moodle will try and write the file into the right location, otherwise you can press a button to download it from the installer and then upload config.php into the main Moodle directory on the server. 
+
+Go to the admin page to continue configuration 
+Once the basic config.php has been correctly created in the previous step, trying to access the front page of your site will take you to the "admin" page for the rest of the configuration. 
+
+The first time you access this admin page, you will be presented with a GPL "shrink wrap" agreement with which you must agree before you can continue with the setup. 
+
+Now Moodle will start setting up your database and creating tables to store data. First, the main database tables are created. You should see a number of SQL statements followed by status messages. You should see SUCCESS next to each one until you see "Main databases set up successfully." 
+
+Tip: If you don't see these, then there must have been some problem with the database or the configuration settings you defined in config.php. Please see Install Moodle with installer script for more details and issues. 
+Scroll down the very bottom of the page and press the "Continue" link. 
+
+You should now see a form where you can define more configuration variables for your installation, such as the default language, SMTP hosts and so on. Don't worry too much about getting everything right just now - you can always come back and edit these later on using the admin interface. The defaults are designed to be useful and secure for most sites. Scroll down to the bottom and click "Save changes". 
+
+Next you will see more pages that print lots of status messages as they set up all the tables required by the various Moodle module. As before, they should all be green. 
+
+Scroll down the very bottom of the page and press the "Continue" link. 
+
+The next page is a form where you can define parameters for your Moodle site and the front page, such as the name, format, description and so on. Fill this out (you can always come back and change these later) and then press "Save changes". 
+
+Finally, you will then be asked to create a top-level administration user for future access to the admin pages. Fill out the details with your own name, email etc and then click "Save changes". Not all the fields are required, but if you miss any important fields you'll be re-prompted for them. You can change this information later via the User profile. 
+
+Make sure you remember the username and password you chose for the administration user account, as they will be necessary to access the administration page in future. 
+
+TIP: If for any reason your install is interrupted, or there is a system error of some kind that prevents you from logging in using the admin account, you can usually log in using the default username of "admin", with password "admin".) 
+Once successful, you will be sent to the home page of your new site! Please note the Site administration block on the left with links. These items are only visible to you because you are logged in as the admin user. All your further administration of Moodle can now be done using this block. 
+
+Create a new course
+Congratulations on setting up your Moodle site! You can now create a new course and continue with your learning.
+

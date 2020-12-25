@@ -1,0 +1,1 @@
+This book does not contain any code. However, the steps for installation of Moodle are provided in  the "Installation.txt" file.
